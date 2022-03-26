@@ -20,6 +20,11 @@
 # 2. open> close --> condition to add parathensis 
 # 3. valid if openN == closedN
 
+import snoop
+import heartrate 
+heartrate.trace(browser=True)
+
+@snoop
 def generate_N_parathensis(N):
     stack=[]
     result=[]
@@ -31,15 +36,20 @@ def generate_N_parathensis(N):
             return
         
         if openN < N:
+            print(openN, closedN, N)
             stack.append("(")
+
             backtrack(openN+1,closedN)
             stack.pop()
 
+
         if closedN <openN:
+            print(openN, closedN, N)
+
             stack.append(")")
             backtrack(openN,closedN+1)
             stack.pop()
-        
+
     backtrack(0,0)
     return result
 
